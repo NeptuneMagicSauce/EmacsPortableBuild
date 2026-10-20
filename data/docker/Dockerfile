@@ -5,13 +5,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     automake \
     texinfo \
-    git \
-    ca-certificates \
     pkg-config \
     libncurses-dev \
-    libgnutls28-dev \
-    libjansson-dev \
-    libxml2-dev
+    git ca-certificates
 
 WORKDIR /build
 
@@ -71,11 +67,7 @@ FROM debian:bookworm-slim AS packager
 RUN apt-get update && apt-get install -y --no-install-recommends \
     patchelf \
     binutils \
-    libxml2 \
-    libjansson4 \
-    libgnutls30 \
-    libncurses6 \
-    && rm -rf /var/lib/apt/lists/*
+    libncurses6
 
 COPY --from=builder /opt/emacs-dest /opt/emacs-portable
 
