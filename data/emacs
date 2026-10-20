@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-ROOT=$(realpath $SCRIPT_DIR/../output)
+ROOT=$(realpath $SCRIPT_DIR/output)
 VERSION=$(basename $(ls $ROOT/libexec/emacs/ | head -1))
 
 export EMACSDATA="$ROOT/share/emacs/$VERSION/etc"
@@ -9,4 +9,4 @@ export EMACSDOC="$ROOT/share/emacs/$VERSION/etc"
 export EMACSPATH="$ROOT/libexec/emacs/$VERSION/x86_64-pc-linux-gnu:$ROOT/share/emacs/$VERSION/etc"
 export EMACSLOADPATH="$ROOT/share/emacs/$VERSION/lisp:$ROOT/share/emacs/$VERSION/site-lisp"
 
-$ROOT/bin/emacs-$VERSION "$@"
+$ROOT/bin/emacs "$@"

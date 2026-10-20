@@ -63,20 +63,24 @@ RUN ./configure \
 RUN make -j$(nproc)
 
 RUN make install
-#    DESTDIR=/emacs
 
 COPY init.el /site-start.el
 RUN cp /site-start.el $(echo /emacs/share/emacs/*/site-lisp/)site-start.el
+
+# clean up
+WORKDIR /emacs
+RUN \
+    rm bin/ebrowse  bin/emacs  bin/emacsclient  bin/etags ; \
+    mv bin/emacs-32.0.50 bin/emacs
 
 FROM scratch
 COPY --from=builder /emacs /
 
 # TODO
+# remove cruft installed in share,libexec ...
+# install procedure and instructions
+# install in AgentHost and opencode, integrate with LocalGenie: submodule?
 # C-v change buffer
 # helm?
-# remove cruft installed in /usr
-# remove prefix usr/local/
-# install in PATH, integrate with LocalGenie: submodule?
-# make it run a binary named emacs without the version for pidof
-# add tmux?
+# add tmux to LocalGeni?
 # clean up docker cache
