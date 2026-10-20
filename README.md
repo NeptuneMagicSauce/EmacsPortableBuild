@@ -1,8 +1,9 @@
 # TODO bla bla
 
 ```bash
-git clone ...
-cd ...
-cd data/docker
-docker buildx build --output type=local,dest=. .
+git clone https://github.com/NeptuneMagicSauce/EmacsPortableBuild.git
+cd EmacsPortableBuild
+./build.sh
+
+# TODO
 ```

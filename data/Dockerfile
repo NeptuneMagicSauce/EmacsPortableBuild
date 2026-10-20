@@ -17,7 +17,10 @@ RUN ./autogen.sh
 
 ENV CFLAGS=-O2
 
-RUN ./configure --without-x --without-all \
+RUN ./configure \
+  --prefix=/emacs \
+  --without-x \
+  --without-all \
   --without-xpm \
   --without-jpeg \
   --without-tiff \
@@ -59,10 +62,21 @@ RUN ./configure --without-x --without-all \
 
 RUN make -j$(nproc)
 
-RUN make install DESTDIR=/emacs
+RUN make install
+#    DESTDIR=/emacs
 
 COPY init.el /site-start.el
-RUN cp /site-start.el $(echo /emacs/usr/local/share/emacs/*/site-lisp/)site-start.el
+RUN cp /site-start.el $(echo /emacs/share/emacs/*/site-lisp/)site-start.el
 
 FROM scratch
 COPY --from=builder /emacs /
+
+# TODO
+# C-v change buffer
+# helm?
+# remove cruft installed in /usr
+# remove prefix usr/local/
+# install in PATH, integrate with LocalGenie: submodule?
+# make it run a binary named emacs without the version for pidof
+# add tmux?
+# clean up docker cache
