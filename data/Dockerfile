@@ -69,6 +69,7 @@ WORKDIR /emacs
 COPY init.el /
 COPY post.install.sh /
 COPY post.install.el /
+COPY emacs.launcher.sh /
 RUN /post.install.sh
 
 FROM scratch

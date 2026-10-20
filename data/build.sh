@@ -2,10 +2,11 @@
 
 set -e
 
+cd "$(dirname $0)"
+
 out="output"
 rm -fr $out
 
-cd "$(dirname $0)"
 docker buildx build --output type=local,dest=$out .
 
 echo
@@ -19,4 +20,4 @@ du -h $tarball
 
 echo
 echo "Install it:"
-echo "tar czf $tarball -C /usr"
+echo "sudo tar xzf $tarball -C /usr"

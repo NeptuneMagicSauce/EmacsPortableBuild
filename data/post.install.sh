@@ -14,11 +14,14 @@ export VERSION=$(basename /emacs/share/emacs/[0-9]*)
 cp $VERBOSE /init.el share/emacs/$VERSION/site-lisp/site-start.el
 
 # bin
-mv $VERBOSE bin/emacs-* bin/emacs
+mkdir -p bin/bin
+rm $VERBOSE bin/emacs
+mv $VERBOSE bin/emacs-* bin/bin/emacs
+cp $VERBOSE /emacs.launcher.sh bin/emacs
 rm $VERBOSE bin/ebrowse bin/emacsclient bin/etags
 
 # install packages
-./bin/emacs --batch -l /post.install.el
+./bin/bin/emacs --batch -l /post.install.el
 
 # include,lib
 rm $VERBOSE -r include lib
