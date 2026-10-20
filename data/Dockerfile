@@ -7,6 +7,7 @@ RUN apt update && apt install -y --no-install-recommends \
     texinfo \
     pkg-config \
     libncurses-dev \
+    libgnutls28-dev \
     git ca-certificates
 
 WORKDIR /build
@@ -45,7 +46,7 @@ RUN ./configure \
   --without-gpm \
   --without-gsettings \
   --without-selinux \
-  --without-gnutls \
+  --with-gnutls \
   --without-zlib \
   --without-modules \
   --without-threads \
@@ -67,17 +68,17 @@ RUN make install
 WORKDIR /emacs
 COPY init.el /
 COPY post.install.sh /
+COPY post.install.el /
 RUN /post.install.sh
 
 FROM scratch
 COPY --from=builder /emacs /
 
 # TODO
-# remove cruft installed in share,libexec ...
-# packages: MD
 # install procedure and instructions
 # install in AgentHost and opencode, integrate with LocalGenie: submodule?
-# C-v change buffer
-# helm?
-# add tmux to LocalGeni?
+# C-v change buffer, with helm with
+# ;; list buffers
+# (global-set-key (kbd "C-v") 'switch-to-buffer)
+# add tmux to LocalGenie?
 # clean up docker cache

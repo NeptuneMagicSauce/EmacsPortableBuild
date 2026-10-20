@@ -9,13 +9,16 @@ set -x
 
 VERBOSE="-v"
 
-VERSION=$(basename /emacs/share/emacs/[0-9]*)
+export VERSION=$(basename /emacs/share/emacs/[0-9]*)
 
 cp $VERBOSE /init.el share/emacs/$VERSION/site-lisp/site-start.el
 
 # bin
 mv $VERBOSE bin/emacs-* bin/emacs
 rm $VERBOSE bin/ebrowse bin/emacsclient bin/etags
+
+# install packages
+./bin/emacs --batch -l /post.install.el
 
 # include,lib
 rm $VERBOSE -r include lib
@@ -28,7 +31,10 @@ cd share
 rm $VERBOSE -r man info metainfo applications icons
 rm $VERBOSE -r emacs/site-lisp
 
+# share/emacs/version
 cd emacs/$VERSION
+
+rm $VERBOSE -r site-lisp/elpa/archives
 
 # lisp source files that are compiled
 find -name \*el -exec sh -c '
@@ -54,7 +60,7 @@ find -name \*el -exec sh -c '
        leim org net gnus cedet calendar \
        play emulation mh-e obsolete \
        erc calc eshell mail image nxml \
-       url use-package \
+       use-package \
        ldefs-boot.el
 )
 
