@@ -1,16 +1,16 @@
 ;;  -*- lexical-binding: t -*-
 
-;; Undo
+;; undo
 (global-set-key (kbd "C-u") 'undo)
 
-;; Scrolling : Ctrl-up/down scroll 1 line
+;; scrolling : Ctrl-up/down scroll 1 line
 (global-set-key (kbd "C-<down>") 'scroll-up-line)
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
 
-;; Change Window
+;; change window
 (windmove-default-keybindings)
 
-;; Paste (Yank) : use X11 buffer = selection-copy
+;; paste (yank) : use X11 buffer = selection-copy
 (setq x-select-enable-primary t)
 
 ;; disable the menu bar
@@ -36,3 +36,10 @@
 
 ;; no startup screen
 (custom-set-variables '(inhibit-startup-screen t))
+
+;; mouse support in terminal
+(unless (display-graphic-p)
+  (xterm-mouse-mode t)
+  (global-set-key [wheel-up] 'scroll-down-line)
+  (global-set-key [wheel-down] 'scroll-up-line)
+  )
