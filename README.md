@@ -14,7 +14,7 @@ Packages: in [post.install.el](data/post.install.el) at step `'package-install`
 ```bash
 git clone https://github.com/NeptuneMagicSauce/EmacsPortableBuild.git
 cd EmacsPortableBuild
-./build.sh
+./data/build.sh
 
 # TODO
 ```
