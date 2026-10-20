@@ -7,6 +7,9 @@
 (global-set-key (kbd "C-<down>") 'scroll-up-line)
 (global-set-key (kbd "C-<up>") 'scroll-down-line)
 
+;; goto-line
+(global-set-key (kbd "M-g") 'goto-line)
+
 ;; change window
 (windmove-default-keybindings)
 
@@ -43,3 +46,6 @@
   (global-set-key [wheel-up] 'scroll-down-line)
   (global-set-key [wheel-down] 'scroll-up-line)
   )
+
+;; theme
+(load-theme 'tango-dark t)
