@@ -20,12 +20,16 @@
 (when (display-graphic-p) (tool-bar-mode -1))
 
 ;; selection (mark) : invert colors
-(set-face-attribute 'region nil :inverse-video t)
+(custom-set-faces '(region ((t (:inverse-video t)))))
 
 ;; modeline
-(set-face-attribute 'mode-line nil :foreground "#444444" :background "#54AFFF")
-(set-face-attribute 'mode-line-inactive nil :foreground "#888888" :background "#D3D7CF" :box nil)
-(custom-set-faces '(mode-line-buffer-id ((t (:foreground "black" :weight normal :inherit nil)))))
+(set-face-attribute 'mode-line nil :foreground "#444444"
+                    :background "#54AFFF") ; active buffer is light black on blue
+(set-face-attribute 'mode-line-inactive nil :foreground "#888888"
+                    :background "#D3D7CF") ; inactive buffer is light black on light white
+(custom-set-faces '(mode-line-buffer-id ((t (
+                                             ; filename is black
+                                             :foreground "black" :weight normal :inherit nil)))))
 
 ;; disable backups with ~ after filename
 (setq make-backup-files nil)
