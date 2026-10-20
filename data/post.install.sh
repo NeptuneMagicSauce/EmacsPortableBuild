@@ -1,0 +1,61 @@
+#!/bin/sh
+
+exec > portable.install.log 2>&1
+
+echo "running this:"
+realpath $0
+
+set -x
+
+VERBOSE="-v"
+
+VERSION=$(basename /emacs/share/emacs/[0-9]*)
+
+cp $VERBOSE /init.el share/emacs/$VERSION/site-lisp/site-start.el
+
+# bin
+mv $VERBOSE bin/emacs-* bin/emacs
+rm $VERBOSE bin/ebrowse bin/emacsclient bin/etags
+
+# include,lib
+rm $VERBOSE -r include lib
+
+# libexec
+rm $VERBOSE libexec/emacs/$VERSION/*/*
+
+# share
+cd share
+rm $VERBOSE -r man info metainfo applications icons
+rm $VERBOSE -r emacs/site-lisp
+
+cd emacs/$VERSION
+
+# lisp source files that are compiled
+find -name \*el -exec sh -c '
+    for el; do
+        if [ -f "${el}c" ]; then
+            rm $VERBOSE $el
+        fi
+    done
+' _ {} +
+
+# etc
+(
+    cd etc
+    rm $VERBOSE -r images tutorials DOC refcards schema nxml org srecode gnus forms e
+    # development files
+    find -maxdepth 1 -type f | xargs rm $VERBOSE
+)
+
+# lisp
+(
+    cd lisp
+    rm $VERBOSE -r \
+       leim org net gnus cedet calendar \
+       play emulation mh-e obsolete \
+       erc calc eshell mail image nxml \
+       url use-package \
+       ldefs-boot.el
+)
+
+exit 0

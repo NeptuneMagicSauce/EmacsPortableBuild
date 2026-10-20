@@ -64,20 +64,17 @@ RUN make -j$(nproc)
 
 RUN make install
 
-COPY init.el /site-start.el
-RUN cp /site-start.el $(echo /emacs/share/emacs/*/site-lisp/)site-start.el
-
-# clean up
 WORKDIR /emacs
-RUN \
-    rm bin/ebrowse  bin/emacs  bin/emacsclient  bin/etags ; \
-    mv bin/emacs-32.0.50 bin/emacs
+COPY init.el /
+COPY post.install.sh /
+RUN /post.install.sh
 
 FROM scratch
 COPY --from=builder /emacs /
 
 # TODO
 # remove cruft installed in share,libexec ...
+# packages: MD
 # install procedure and instructions
 # install in AgentHost and opencode, integrate with LocalGenie: submodule?
 # C-v change buffer
