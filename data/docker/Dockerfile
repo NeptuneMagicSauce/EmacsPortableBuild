@@ -61,5 +61,8 @@ RUN make -j$(nproc)
 
 RUN make install DESTDIR=/emacs
 
+COPY init.el /site-start.el
+RUN cp /site-start.el $(echo /emacs/usr/local/share/emacs/*/site-lisp/)site-start.el
+
 FROM scratch
 COPY --from=builder /emacs /
