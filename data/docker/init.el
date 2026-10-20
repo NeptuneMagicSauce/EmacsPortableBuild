@@ -1,3 +1,5 @@
+;;  -*- lexical-binding: t -*-
+
 ;; Undo
 (global-set-key (kbd "C-u") 'undo)
 
@@ -15,21 +17,18 @@
 (menu-bar-mode -1)
 
 ;; disable the tool bar
-(tool-bar-mode -1)
+(when (display-graphic-p) (tool-bar-mode -1))
 
-;; keyboard selection (mark) : invert colors
+;; selection (mark) : invert colors
 (set-face-attribute 'region nil :inverse-video t)
 
 ;; modeline
-(set-face-attribute 'mode-line nil
-                    :foreground "black"
-                    :background "#00BD00" ; Green
-                    ;; :background "#ff9f00" ; DarkOrange
-                    )
+(set-face-attribute 'mode-line nil :foreground "#444444" :background "#54AFFF")
+(set-face-attribute 'mode-line-inactive nil :foreground "#888888" :background "#D3D7CF" :box nil)
+(custom-set-faces '(mode-line-buffer-id ((t (:foreground "black" :weight normal :inherit nil)))))
 
 ;; disable backups with ~ after filename
 (setq make-backup-files nil)
 
 ;; no startup screen
-(custom-set-variables
- '(inhibit-startup-screen t))
+(custom-set-variables '(inhibit-startup-screen t))
