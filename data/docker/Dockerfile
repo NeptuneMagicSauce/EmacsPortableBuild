@@ -59,17 +59,7 @@ RUN ./configure --without-x --without-all \
 #     --without-x --with-json --with-gnutls
 RUN make -j$(nproc)
 
-RUN make install DESTDIR=/opt/emacs-dest
-
-# --- Stage 2: Bundle & Make Portable ---
-FROM debian:bookworm-slim AS packager
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    patchelf \
-    binutils \
-    libncurses6
-
-COPY --from=builder /opt/emacs-dest /opt/emacs-portable
+RUN make install DESTDIR=/opt/emacs-portable
 
 # Create a local shared library directory inside the bundle
 RUN mkdir -p /opt/emacs-portable/usr/local/lib
@@ -106,4 +96,4 @@ RUN for bin in /opt/emacs-portable/usr/local/bin/*; do \
 
 # --- Stage 3: Export Artifact ---
 FROM scratch
-COPY --from=packager /opt/emacs-portable /
+COPY --from=builder /opt/emacs-portable /
