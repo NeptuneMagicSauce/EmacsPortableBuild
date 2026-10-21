@@ -65,7 +65,6 @@ RUN make -j$(nproc)
 
 RUN make install
 
-WORKDIR /emacs
 COPY init.el /
 COPY post.install.sh /
 COPY post.install.el /
@@ -76,8 +75,7 @@ FROM scratch
 COPY --from=builder /emacs /
 
 # TODO
-# install procedure and instructions
-# install in AgentHost and opencode, integrate with LocalGenie: submodule?
+# install in opencode, integrate with LocalGenie
 # C-v change buffer, with helm with
 # ;; list buffers
 # (global-set-key (kbd "C-v") 'switch-to-buffer)

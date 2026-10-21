@@ -2,6 +2,8 @@
 
 exec > portable.install.log 2>&1
 
+cd /emacs
+
 echo "running this:"
 realpath $0
 
