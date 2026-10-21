@@ -77,10 +77,6 @@ COPY --from=builder /emacs /
 
 # TODO
 
-# C-v change buffer, with helm with
-# ;; list buffers
+# fancy change buffer
+# needs helm
 # (global-set-key (kbd "C-v") 'switch-to-buffer)
-
-# add tmux to LocalGenie?
-
-# clean up docker cache
