@@ -15,7 +15,7 @@ echo "post install logs: $(realpath $out/*log)"
 cd $out
 tar czf ../emacs.tgz *
 cd ..
-rm -fr $out
+du -sh $(realpath $out)
 tarball=$(realpath emacs.tgz)
 du -h $tarball
 

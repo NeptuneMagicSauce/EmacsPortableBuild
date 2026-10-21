@@ -68,6 +68,7 @@ RUN make install
 COPY init.el /
 COPY post.install.sh /
 COPY post.install.el /
+COPY save.on.quit.el /
 COPY emacs.launcher.sh /
 RUN /post.install.sh
 
@@ -75,9 +76,11 @@ FROM scratch
 COPY --from=builder /emacs /
 
 # TODO
-# install in opencode, integrate with LocalGenie
+
 # C-v change buffer, with helm with
 # ;; list buffers
 # (global-set-key (kbd "C-v") 'switch-to-buffer)
+
 # add tmux to LocalGenie?
+
 # clean up docker cache

@@ -1,8 +1,8 @@
 #!/bin/sh
 
-exec > portable.install.log 2>&1
-
 cd /emacs
+
+exec > portable.install.log 2>&1
 
 echo "running this:"
 realpath $0
@@ -14,6 +14,7 @@ VERBOSE="-v"
 export VERSION=$(basename /emacs/share/emacs/[0-9]*)
 
 cp $VERBOSE /init.el share/emacs/$VERSION/site-lisp/site-start.el
+cp $VERBOSE /save.on.quit.el share/emacs/$VERSION/site-lisp/
 
 # bin
 mkdir -p bin/bin
