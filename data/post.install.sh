@@ -63,7 +63,7 @@ find -name \*el -exec sh -c '
 (
     cd lisp
     rm $VERBOSE -r \
-       leim org net gnus cedet calendar \
+       leim org net gnus cedet \
        play emulation mh-e obsolete \
        erc calc eshell mail image nxml \
        use-package \

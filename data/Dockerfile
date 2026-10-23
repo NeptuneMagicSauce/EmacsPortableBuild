@@ -77,6 +77,16 @@ COPY --from=builder /emacs /
 
 # TODO
 
+# use submodules
+# then we don't have to copy the tarball to be in context dir
+# AND/OR
+# mount bind in the container the same dir
+# so that it does not take twice the size
+# then we need much fewer docker shenanigans
+# just setting the PATH
+# but then set the PATH also in the VM
+# but then do we no longer need the tarball?
+
 # fancy change buffer
 # needs helm
 # (global-set-key (kbd "C-v") 'switch-to-buffer)
